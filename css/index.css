@@ -22216,8 +22216,8 @@ body[data-type="essay"] #web_bg {
   margin-left: 0.5rem;
   font-size: 0.7rem;
   align-items: center;
-  background-color: rgba(245, 108, 108, 0.13);
-  color: rgb(245, 108, 108);
+  background-color: rgba(251, 191, 36, 0.13);
+  color: rgb(251, 191, 36);
   padding: 0px 8px;
   border-radius: 20px;
 }
@@ -23244,7 +23244,6 @@ a.categoryButton:after {
   background: linear-gradient(to right, #d4a017, #d97706);
   background-size: 200%;
 }
-
 #topPostGroup .top-group-list-item {
   display: flex;
   width: calc(100% / 4 - 5px);
