@@ -1,0 +1,584 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>项目-发动机健康预测 | guo</title><meta name="keywords" content="深度学习"><meta name="author" content="G-forword"><meta name="copyright" content="G-forword"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="项目-发动机健康预测"><meta name="application-name" content="项目-发动机健康预测"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="项目-发动机健康预测"><meta property="og:url" content="http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/index.html"><meta property="og:site_name" content="guo"><meta property="og:description" content="一、数据处理1.1数据选取使用 NASA 的 C-MAPSS 数据集，包含不同发动机在不同工况下的传感器序列 选取有用的列：索引与标识列（共 2 列），这两列不作为神经模型的特征输入，但必须提取用于数据管理和计算 RUL。  **第 1 列 (Unit Number)**：发动机 ID。 **第 2"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="http://example.com/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg"><meta property="article:author" content="G-forword"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://example.com/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg"><meta name="description" content="一、数据处理1.1数据选取使用 NASA 的 C-MAPSS 数据集，包含不同发动机在不同工况下的传感器序列 选取有用的列：索引与标识列（共 2 列），这两列不作为神经模型的特征输入，但必须提取用于数据管理和计算 RUL。  **第 1 列 (Unit Number)**：发动机 ID。 **第 2"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/"><link rel="preconnect" href="//cdn.cbd.int"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"w(ﾟДﾟ)w 不要走！再看看嘛！","backTitle":"♪(^∇^*)欢迎肥来！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: undefined,
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: G-forword","link":"链接: ","source":"来源: guo","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'guo',
+  title: '项目-发动机健康预测',
+  postAI: '',
+  pageFillDescription: ', 一、数据处理, 1.1数据选取, 1.2 归一化处理, 1.3 滑动窗口切割, 1.4 标签处理 (RUL Labeling), 二、特征提取, 2.1 精细复合多尺度特征熵 (RCMPhE), 2.1.1 相位熵 (PhE) 的基本计算, 2.1.2 精细复合多尺度 (Refined Composite) 逻辑, 1、多序列粗粒化 (Multi-offset Coarse-graining), 2、精细化处理 (Refining), 2.2 实现步骤与调整, 三、模型训练, 3.1 建立三路数据加载器, 3.2 定义 DTFFNet 模型架构, 3.2.1 异构输入层, 3.2.2 特征提取引擎, 3.2.3 深度特征融合模块 (Deep Feature Fusion Module), 四、测试评估与可视化, 4.1 指标验证一数据处理数据选取使用的数据集包含不同发动机在不同工况下的传感器序列选取有用的列索引与标识列共列这两列不作为神经模型的特征输入但必须提取用于数据管理和计算第列发动机第列当前循环数传感器编号原始列索引物理含义在中的趋势建议用途第列低压压气机出口温度上升参与分支第列高压压气机出口温度显著上升特征提取核心第列低压涡轮出口温度上升参与分支第列高压压气机出口总压显著下降特征提取核心第列物理风扇速度下降频域分支第列物理核心机速度上升频域分支第列高压压气机出口静压上升参与分支第列燃油流量与出口静压比下降参与分支第列修正的风扇速度下降参与分支第列旁通比上升参与计算第列下游冷却剂流量下降参与分支第列下游冷却剂流量下降参与分支在简单工况下剩下的列没有任何预测价值第列在中几乎是常数无法提供退化信息第列这些传感器如等在中自始至终是一条直线神经网络无法从零方差的数据中学到任何东西反而会产生噪声干扰归一化处理采用将不同量纲的传感器数据如温度几百度压力几个大气压缩放到区间消除量纲影响标准化滑动窗口切割为了将静态的传感器快照转化为具有时间相关性的时序特征本研究采用了滑动窗口技术对标准化后的数据进行处理窗口长度设定滑动窗口大小为这意味着模型每次预测都会参考当前循环及其前方共个周期的历史信息以捕捉短期的退化斜率滑动步长在训练集处理中步长设定为通过这种高重叠度的采样方式可以最大限度地扩充样本量使模型学习到更细腻的性能演变过程数据对齐对于每一个窗口其对应的标签被定义为该窗口最后一个时间点的剩余寿命值支路一致性原始传感器分支支路与特征分支支路共用相同的窗口基准确保了宏观演变特征与微观动力学特征在时间尺度上的严格对齐标签处理分段策略采用分段线性目标函数设定退化阈值逻辑实现利用函数对早期健康阶段的标签进行平滑截断优势有效屏蔽了发动机运行初期的无规律波动使的三分支架构能够更专注于提取之后的关键退化特征二特征提取精细复合多尺度特征熵解决了神经网络难以直接捕捉微弱退化征兆的问题创新点精细复合多尺度相位熵它的实现旨在克服传统多尺度熵在尺度因子较大时导致的数据长度缩短信息丢失以及结果不稳定的问题多尺度分析发动机的故障往往在不同频率下表现不同在多个时间尺度上量化信号熵值计算通过计算样本熵提取信号中的混乱度当发动机磨损加剧信号的非线性特征会变化熵值随之波动相位熵的基本计算在进行多尺度分析前首先要理解单个时间序列的相位熵计算相位熵主要利用相位信息来描述非线性动力学系统的复杂性相位提取对长度为的时间序列进行希尔伯特变换或直接分析其相位符号化概率分布将信号的相位信息映射到预定义的概率分布空间香农熵计算根据概率分布计算熵值精细复合多尺度逻辑这是区别于普通多尺度相位熵的关键改进传统方法只取每一个尺度下的第一个序列而提取了所有可能偏移下的序列多序列粗粒化对于选定的传感器窗口序列长度为在尺度因子下不再只生成一个序列而是生成个不同的粗粒化序列第个粗粒化序列定义为物理意义这样做能有效利用窗口内有限的数据点防止在较大时序列变得太短导致计算失效精细化处理在普通复合多尺度中是先算熵再取平均而在中是先统计所有个序列的符号化分布概率的平均值再计算一个熵值计算尺度下第个偏移序列的每个模式出现的频率计算该尺度下所有偏移序列模式概率的平均值计算最终实现步骤与调整步骤操作要点输入滑动窗口截取的传感器段如长度参数选择尺度因子通常取到因较短尺度不宜过大嵌入维度常取或计算流程希尔伯特变换粗粒化个序列统计平均模式概率香农熵计算输出特征每个窗口输出一个多维向量如果模型的预测结果不理想可以调整观察熵值稳定性打印几个的曲线如果曲线像锯齿一样上下跳变说明窗口太小建议调大到或匹配退化速度如果发动机退化很快如较小的窗口如可能更灵敏三模型训练模型训练采用的是深度多特征融合网络这个模型比普通网络稍微复杂一点需要按照以下三个步骤来整合代码建立三路数据加载器模型同时输入进三份数据支路传感器数据从截取的滑动窗口支路物理先验从读取的熵特征标签该窗口对应的剩余寿命数值确保这三者在时间轴上是对齐的即同一个窗口对应同一个熵值和同一个定义模型架构构建一个拥有三个输入端的模型异构输入层模型在入口处将数据解耦为三路并行每一路负责不同的物理统计视角分支一原始特征通道输入的传感器时序矩阵作用保留原始信号的量纲和直接退化趋势分支二动力学特征通道输入与窗口对齐的熵特征作用量化系统内部的不确定性与退化速率的非线性变化分支三全局统计上下文通道输入通常为滑动窗口内的时域指标如均值标准差或不同感受野的特征作用提供宏观的统计背景抑制单点传感器的随机噪声特征提取引擎在每一路分支内部通常采用不同的算子进行空间与时域的压缩提取器用于获取局部的空间相关性捕捉传感器之间的耦合关系残差块为了防止深层网络退化并在特征传递过程中保留低阶物理信息注意力机制对窗口内个时间步进行加权模型会自动盯住那些发生突变的异常时刻深度特征融合模块这是名字的由来它不是简单的通常包含交互映射让的非线性信息去调制原始传感器的特征响应多尺度聚合将三个分支提取的高阶抽象特征映射到同一个特征空间全连接预测器融合后的向量通过多层感知机将高维特征压缩为单一的标量输出即四测试评估与可视化指标验证性能指标衡量预测值与真实值之间的绝对偏离程度得分特有的评分机制对预测寿命过长的情况惩罚更严因为这在航空安全中更危险可视化分析残差分布图验证误差是否符合正态分布全寿命轨迹图追踪单台发动机从健康到失效的完整过程即你刚才生成的红绿线图误差柱状图识别哪些特定样本导致了的上升',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-01-28 16:28:40',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="/img/Avatar.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><a id="site-name" href="/" accesskey="h"><div class="title">guo</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="/img/Wechatpay.png" target="_blank"><img class="post-qr-code-img" alt="微信" src="/img/Wechatpay.png"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/Alipay.jpg" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="/img/Alipay.jpg"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 1.05rem;">深度学习<sup>5</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/01/"><span class="card-archive-list-date">一月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/12/"><span class="card-archive-list-date">十二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">九月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/01/"><span class="card-archive-list-date">一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>深度学习</span></a></span></div></div><h1 class="post-title" itemprop="name headline">项目-发动机健康预测</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2026-01-28T08:20:42.917Z" title="发表于 2026-01-28 16:20:42">2026-01-28</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2026-01-28T08:28:40.202Z" title="更新于 2026-01-28 16:28:40">2026-01-28</time></span></div><div class="meta-secondline"><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为南昌"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>南昌</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/"><header><a class="post-meta-categories" href="/categories/%E5%AD%A6%E4%B9%A0/" itemprop="url">学习</a><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" tabindex="-1" itemprop="url">深度学习</a><h1 id="CrawlerTitle" itemprop="name headline">项目-发动机健康预测</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">G-forword</span><time itemprop="dateCreated datePublished" datetime="2026-01-28T08:20:42.917Z" title="发表于 2026-01-28 16:20:42">2026-01-28</time><time itemprop="dateCreated datePublished" datetime="2026-01-28T08:28:40.202Z" title="更新于 2026-01-28 16:28:40">2026-01-28</time></header><h2 id=""><a href="#" class="headerlink" title=""></a></h2><h2 id="一、数据处理"><a href="#一、数据处理" class="headerlink" title="一、数据处理"></a>一、数据处理</h2><h3 id="1-1数据选取"><a href="#1-1数据选取" class="headerlink" title="1.1数据选取"></a>1.1数据选取</h3><p>使用 NASA 的 <strong>C-MAPSS</strong> 数据集，包含不同发动机在不同工况下的传感器序列</p>
+<p><strong>选取有用的列：</strong>索引与标识列（共 2 列），这两列不作为神经模型的特征输入，但必须提取用于数据管理和计算 RUL。</p>
+<ul>
+<li>**第 1 列 (Unit Number)**：发动机 ID。</li>
+<li>**第 2 列 (Cycles)**：当前循环数。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><strong>传感器编号</strong></th>
+<th><strong>原始列索引</strong></th>
+<th><strong>物理含义</strong></th>
+<th><strong>在 FD001 中的趋势</strong></th>
+<th><strong>建议用途</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>s2</strong></td>
+<td>第 7 列</td>
+<td>低压压气机出口温度</td>
+<td>上升</td>
+<td>参与 CNN&#x2F;FFT 分支</td>
+</tr>
+<tr>
+<td><strong>s3</strong></td>
+<td>第 8 列</td>
+<td><strong>高压压气机出口温度 (T30)</strong></td>
+<td><strong>显著上升</strong></td>
+<td><strong>RCMPhE 特征提取核心</strong></td>
+</tr>
+<tr>
+<td><strong>s4</strong></td>
+<td>第 9 列</td>
+<td>低压涡轮出口温度</td>
+<td>上升</td>
+<td>参与 CNN 分支</td>
+</tr>
+<tr>
+<td><strong>s7</strong></td>
+<td>第 12 列</td>
+<td><strong>高压压气机出口总压 (P30)</strong></td>
+<td><strong>显著下降</strong></td>
+<td><strong>RCMPhE 特征提取核心</strong></td>
+</tr>
+<tr>
+<td><strong>s8</strong></td>
+<td>第 13 列</td>
+<td><strong>物理风扇速度 (Nf)</strong></td>
+<td><strong>下降</strong></td>
+<td>频域 Transformer 分支</td>
+</tr>
+<tr>
+<td><strong>s9</strong></td>
+<td>第 14 列</td>
+<td>物理核心机速度</td>
+<td>上升</td>
+<td>频域 Transformer 分支</td>
+</tr>
+<tr>
+<td><strong>s11</strong></td>
+<td>第 16 列</td>
+<td>高压压气机出口静压</td>
+<td>上升</td>
+<td>参与 CNN 分支</td>
+</tr>
+<tr>
+<td><strong>s12</strong></td>
+<td>第 17 列</td>
+<td>燃油流量与出口静压比</td>
+<td>下降</td>
+<td>参与 CNN 分支</td>
+</tr>
+<tr>
+<td><strong>s13</strong></td>
+<td>第 18 列</td>
+<td>修正的风扇速度</td>
+<td>下降</td>
+<td>参与 CNN 分支</td>
+</tr>
+<tr>
+<td><strong>s15</strong></td>
+<td>第 20 列</td>
+<td>旁通比</td>
+<td>上升</td>
+<td>参与 RCMPhE 计算</td>
+</tr>
+<tr>
+<td><strong>s20</strong></td>
+<td>第 25 列</td>
+<td>HPT 下游冷却剂流量</td>
+<td>下降</td>
+<td>参与 CNN 分支</td>
+</tr>
+<tr>
+<td><strong>s21</strong></td>
+<td>第 26 列</td>
+<td>LPT 下游冷却剂流量</td>
+<td>下降</td>
+<td>参与 CNN 分支</td>
+</tr>
+</tbody></table>
+<p>在 FD001 简单工况下，剩下的列没有任何预测价值：</p>
+<ul>
+<li>**第 3, 4, 5 列 (Setting 1, 2, 3)**：在 FD001 中几乎是常数，无法提供退化信息。</li>
+<li><strong>第 6, 10, 11, 15, 19, 21, 22, 23, 24 列</strong>：这些传感器（如 s1, s5, s10, s16, s18, s19 等）在 FD001 中自始至终是一条直线，<strong>神经网络无法从零方差的数据中学到任何东西</strong>，反而会产生噪声干扰。</li>
+</ul>
+<h3 id="1-2-归一化处理"><a href="#1-2-归一化处理" class="headerlink" title="1.2 归一化处理"></a>1.2 归一化处理</h3><p>采用 <strong>Min-Max Scaling</strong> 将不同量纲的传感器数据（如温度几百度、压力几个大气压）缩放到 $[0, 1]$ 区间，消除量纲影响。</p>
+<p><strong>Min-Max 标准化</strong>：<br>$$<br>x’ &#x3D; \frac{x - \min}{\max - \min}<br>$$</p>
+<h3 id="1-3-滑动窗口切割"><a href="#1-3-滑动窗口切割" class="headerlink" title="1.3 滑动窗口切割"></a>1.3 滑动窗口切割</h3><p>为了将静态的传感器快照转化为具有时间相关性的时序特征，本研究采用了滑动窗口技术对标准化后的数据进行处理：</p>
+<ul>
+<li>**窗口长度 ($W$)**：设定滑动窗口大小为 <strong>30</strong>。这意味着模型每次预测都会参考当前循环及其前方共 30 个周期的历史信息，以捕捉短期的退化斜率。</li>
+<li>**滑动步长 ($S$)**：在训练集处理中，步长设定为 <strong>1</strong>。通过这种高重叠度的采样方式，可以最大限度地扩充样本量，使模型学习到更细腻的性能演变过程。</li>
+<li><strong>数据对齐</strong>：对于每一个窗口 $t$，其对应的标签（Label）被定义为该窗口最后一个时间点的剩余寿命（RUL）值。</li>
+<li><strong>支路一致性</strong>：原始传感器分支（支路 A&#x2F;B）与 RCMPhE 特征分支（支路 C）共用相同的窗口基准，确保了宏观演变特征与微观动力学特征在时间尺度上的严格对齐。</li>
+</ul>
+<h3 id="1-4-标签处理-RUL-Labeling"><a href="#1-4-标签处理-RUL-Labeling" class="headerlink" title="1.4 标签处理 (RUL Labeling)"></a>1.4 标签处理 (RUL Labeling)</h3><p><strong>分段策略</strong>：采用分段线性（Piecewise Linear）目标函数，设定退化阈值 $R_{max} &#x3D; 130$。</p>
+<p><strong>逻辑实现</strong>：利用 <code>min(current_rul, self.max_rul)</code> 函数对早期健康阶段的标签进行平滑截断。</p>
+<p><strong>优势</strong>：有效屏蔽了发动机运行初期的无规律波动，使 <strong>DTFFNet</strong> 的三分支架构能够更专注于提取 $RUL &lt; 130$ 之后的关键退化特征。</p>
+<h2 id="二、特征提取"><a href="#二、特征提取" class="headerlink" title="二、特征提取"></a>二、特征提取</h2><h3 id="2-1-精细复合多尺度特征熵-RCMPhE"><a href="#2-1-精细复合多尺度特征熵-RCMPhE" class="headerlink" title="2.1 精细复合多尺度特征熵 (RCMPhE)"></a>2.1 精细复合多尺度特征熵 (RCMPhE)</h3><p><strong>解决了神经网络难以直接捕捉微弱退化征兆的问题（创新点）</strong></p>
+<p><strong>精细复合多尺度相位熵 (RCMPhE)</strong> ，它的实现旨在克服传统多尺度熵在尺度因子较大时导致的数据长度缩短、信息丢失以及结果不稳定的问题。</p>
+<ul>
+<li><strong>多尺度分析</strong>：发动机的故障往往在不同频率下表现不同，RCMPhE 在多个时间尺度上量化信号。</li>
+<li><strong>熵值计算</strong>：通过计算样本熵，提取信号中的“混乱度”。当发动机磨损加剧，信号的非线性特征会变化，熵值随之波动。</li>
+</ul>
+<h4 id="2-1-1-相位熵-PhE-的基本计算"><a href="#2-1-1-相位熵-PhE-的基本计算" class="headerlink" title="2.1.1 相位熵 (PhE) 的基本计算"></a>2.1.1 相位熵 (PhE) 的基本计算</h4><p>在进行多尺度分析前，首先要理解单个时间序列的相位熵计算。相位熵主要利用相位信息来描述非线性动力学系统的复杂性。</p>
+<ol>
+<li><strong>相位提取</strong>：对长度为 $N$ 的时间序列 $X&#x3D;{x(1), x(2), \dots, x(N)}$ 进行希尔伯特变换 (Hilbert Transform) 或直接分析其相位。</li>
+<li><strong>符号化&#x2F;概率分布</strong>：将信号的相位信息映射到预定义的概率分布空间。</li>
+<li><strong>香农熵计算</strong>：根据概率分布 $p_i$ 计算熵值 $PhE &#x3D; -\sum p_i \ln(p_i)$。</li>
+</ol>
+<hr>
+<h4 id="2-1-2-精细复合多尺度-Refined-Composite-逻辑"><a href="#2-1-2-精细复合多尺度-Refined-Composite-逻辑" class="headerlink" title="2.1.2 精细复合多尺度 (Refined Composite) 逻辑"></a>2.1.2 精细复合多尺度 (Refined Composite) 逻辑</h4><p>这是 RCMPhE 区别于普通多尺度相位熵 (MPhE) 的关键改进。传统方法只取每一个尺度下的<strong>第一个</strong>序列，而 RCMPhE 提取了<strong>所有可能偏移</strong>下的序列。</p>
+<h5 id="1、多序列粗粒化-Multi-offset-Coarse-graining"><a href="#1、多序列粗粒化-Multi-offset-Coarse-graining" class="headerlink" title="1、多序列粗粒化 (Multi-offset Coarse-graining)"></a>1、多序列粗粒化 (Multi-offset Coarse-graining)</h5><p>对于选定的传感器窗口序列（长度为 $W$），在尺度因子 $\tau$ 下，不再只生成一个序列，而是生成 $\tau$ 个不同的粗粒化序列。第 $k$ 个粗粒化序列 $y_{k,j}^{(\tau)}$ 定义为：</p>
+<p>$$y_{k,j}^{(\tau)} &#x3D; \frac{1}{\tau} \sum_{i&#x3D;(j-1)\tau+k}^{j\tau+k-1} x_i, \quad 1 \leq j \leq \lfloor \frac{N-k+1}{\tau} \rfloor, \quad 1 \leq k \leq \tau$$</p>
+<ul>
+<li><strong>物理意义</strong>：这样做能有效利用窗口内有限的数据点，防止在 $\tau$ 较大时序列变得太短导致计算失效。</li>
+</ul>
+<h5 id="2、精细化处理-Refining"><a href="#2、精细化处理-Refining" class="headerlink" title="2、精细化处理 (Refining)"></a>2、精细化处理 (Refining)</h5><p>在普通复合多尺度中，是先算熵再取平均；而在 <strong>RCMPhE</strong> 中，是先统计所有 $\tau$ 个序列的符号化分布概率的平均值，再计算一个熵值：</p>
+<ol>
+<li><p>计算尺度 $\tau$ 下，第 $k$ 个偏移序列的每个模式 $i$ 出现的频率 $p_{k,i}^{(\tau)}$。</p>
+</li>
+<li><p>计算该尺度下所有偏移序列模式概率的平均值：$\bar{p}<em>{i}^{(\tau)} &#x3D; \frac{1}{\tau} \sum</em>{k&#x3D;1}^{\tau} p_{k,i}^{(\tau)}$。</p>
+</li>
+<li><p><strong>计算最终 RCMPhE</strong>：</p>
+<p>$$RCMPhE(X, \tau) &#x3D; -\sum_{i} \bar{p}<em>{i}^{(\tau)} \ln(\bar{p}</em>{i}^{(\tau)})$$</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-2-实现步骤与调整"><a href="#2-2-实现步骤与调整" class="headerlink" title="2.2 实现步骤与调整"></a>2.2 实现步骤与调整</h3><table>
+<thead>
+<tr>
+<th><strong>步骤</strong></th>
+<th><strong>操作要点</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>输入</strong></td>
+<td>滑动窗口截取的传感器段（如长度 $W&#x3D;30$）。</td>
+</tr>
+<tr>
+<td><strong>参数选择</strong></td>
+<td>**尺度因子 $\tau$<strong>：通常取 1 到 5（因 $W$ 较短，尺度不宜过大）；</strong>嵌入维度 $m$**：常取 2 或 3。</td>
+</tr>
+<tr>
+<td><strong>计算流程</strong></td>
+<td>1. 希尔伯特变换 $\rightarrow$ 2. 粗粒化（$\tau$ 个序列） $\rightarrow$ 3. 统计平均模式概率 $\rightarrow$ 4. 香农熵计算。</td>
+</tr>
+<tr>
+<td><strong>输出特征</strong></td>
+<td>每个窗口输出一个多维向量 $[RCMPhE_{\tau&#x3D;1}, RCMPhE_{\tau&#x3D;2}, \dots]$。</td>
+</tr>
+</tbody></table>
+<p><strong>如果模型的预测结果（RMSE&#x2F;Score）不理想，可以调整：</strong></p>
+<ol>
+<li><strong>观察熵值稳定性</strong>：打印几个 Unit 的 RCMPhE 曲线。如果曲线像锯齿一样上下跳变，说明窗口太小，建议调大到 40 或 50。</li>
+<li><strong>匹配退化速度</strong>：如果发动机退化很快（如 FD002&#x2F;004），较小的窗口（如 20）可能更灵敏。</li>
+</ol>
+<h2 id="三、模型训练"><a href="#三、模型训练" class="headerlink" title="三、模型训练"></a>三、模型训练</h2><p>模型训练**采用的是 <strong>DTFFNet</strong>（深度多特征融合网络），这个模型比普通网络稍微复杂一点。需要按照以下三个步骤来整合代码：</p>
+<hr>
+<h3 id="3-1-建立三路数据加载器"><a href="#3-1-建立三路数据加载器" class="headerlink" title="3.1 建立三路数据加载器"></a>3.1 建立三路数据加载器</h3><p>模型同时输入进三份数据：</p>
+<ol>
+<li><strong>支路 A&#x2F;B（传感器数据）</strong>：从 <code>train_FD001.txt</code> 截取的滑动窗口 $(30, 12)$。</li>
+<li><strong>支路 C（物理先验）</strong>：从 <code>train_FD001_rcmphe.npy</code> 读取的熵特征 $(36,)$。</li>
+<li>**标签 (RUL)**：该窗口对应的剩余寿命数值。</li>
+</ol>
+<p>确保这三者在时间轴上是<strong>对齐</strong>的（即同一个窗口对应同一个熵值和同一个 RUL）。</p>
+<hr>
+<h3 id="3-2-定义-DTFFNet-模型架构"><a href="#3-2-定义-DTFFNet-模型架构" class="headerlink" title="3.2 定义 DTFFNet 模型架构"></a>3.2 定义 DTFFNet 模型架构</h3><p>构建一个拥有三个输入端的模型：</p>
+<h4 id="3-2-1-异构输入层"><a href="#3-2-1-异构输入层" class="headerlink" title="3.2.1 异构输入层"></a>3.2.1 异构输入层</h4><p>模型在入口处将数据解耦为三路并行，每一路负责不同的物理&#x2F;统计视角：</p>
+<ul>
+<li><strong>分支一：原始特征通道 (Raw Signal Branch)</strong><ul>
+<li><strong>输入</strong>：$30 \times 12$ 的传感器时序矩阵。</li>
+<li><strong>作用</strong>：保留原始信号的量纲和直接退化趋势。</li>
+</ul>
+</li>
+<li><strong>分支二：动力学特征通道 (Nonlinear Dynamics Branch)</strong><ul>
+<li><strong>输入</strong>：与窗口对齐的 <strong>RCMPhE</strong> 熵特征。</li>
+<li><strong>作用</strong>：量化系统内部的不确定性与退化速率的非线性变化。</li>
+</ul>
+</li>
+<li><strong>分支三：全局统计&#x2F;上下文通道 (Global&#x2F;Contextual Branch)</strong><ul>
+<li><strong>输入</strong>：通常为滑动窗口内的时域指标（如均值、标准差）或不同感受野的特征。</li>
+<li><strong>作用</strong>：提供宏观的统计背景，抑制单点传感器的随机噪声。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h4 id="3-2-2-特征提取引擎"><a href="#3-2-2-特征提取引擎" class="headerlink" title="3.2.2 特征提取引擎"></a>3.2.2 特征提取引擎</h4><p>在每一路分支内部，通常采用不同的算子进行空间与时域的压缩：</p>
+<ul>
+<li><strong>1D-CNN 提取器</strong>：用于获取局部的空间相关性，捕捉传感器之间的耦合关系。</li>
+<li>**残差块 (Residual Blocks)**：为了防止深层网络退化，并在特征传递过程中保留低阶物理信息。</li>
+<li>**注意力机制 (Attention Mechanism)**：对窗口内 30 个时间步进行加权，模型会自动“盯住”那些发生突变的异常时刻。</li>
+</ul>
+<h4 id="3-2-3-深度特征融合模块-Deep-Feature-Fusion-Module"><a href="#3-2-3-深度特征融合模块-Deep-Feature-Fusion-Module" class="headerlink" title="3.2.3 深度特征融合模块 (Deep Feature Fusion Module)"></a>3.2.3 深度特征融合模块 (Deep Feature Fusion Module)</h4><p>这是 <code>DTFFNet</code> 名字的由来。它不是简单的 <code>concat</code>，通常包含：</p>
+<ul>
+<li>**交互映射 (Interactive Mapping)**：让 RCMPhE 的非线性信息去调制（Modulate）原始传感器的特征响应。</li>
+<li><strong>多尺度聚合</strong>：将三个分支提取的高阶抽象特征映射到同一个特征空间。</li>
+<li><strong>全连接预测器 (FC Layers)<strong>：融合后的向量通过多层感知机（MLP），将高维特征压缩为单一的标量输出——即</strong>RUL</strong>。</li>
+</ul>
+<h2 id="四、测试评估与可视化"><a href="#四、测试评估与可视化" class="headerlink" title="四、测试评估与可视化"></a>四、测试评估与可视化</h2><h3 id="4-1-指标验证"><a href="#4-1-指标验证" class="headerlink" title="4.1 指标验证"></a>4.1 指标验证</h3><ul>
+<li><strong>性能指标</strong>：<ul>
+<li>**RMSE (14.64)**：衡量预测值与真实值之间的绝对偏离程度。</li>
+<li>**Score (得分)**：C-MAPSS 特有的评分机制，对“预测寿命过长”的情况惩罚更严（因为这在航空安全中更危险）。</li>
+</ul>
+</li>
+<li><strong>可视化分析</strong>：<ul>
+<li><strong>残差分布图</strong>：验证误差是否符合正态分布。</li>
+<li><strong>全寿命轨迹图</strong>：追踪单台发动机从健康到失效的完整过程（即你刚才生成的红绿线图）。</li>
+<li><strong>误差柱状图</strong>：识别哪些特定样本导致了 RMSE 的上升。</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20260127213624540.png" alt="image-20260127213624540"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="C:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20260127213642014.png" alt="image-20260127213642014"></p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/Avatar.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/Avatar.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">G-forword</div><div class="post-copyright__author_desc"></div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/')">项目-发动机健康预测</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="/img/Wechatpay.png" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/Wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/Alipay.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/Alipay.jpg" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=项目-发动机健康预测&amp;url=http://example.com/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/&amp;pic=/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://example.com" target="_blank">guo</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>深度学习<span class="tagsPageCount">5</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/12/07/%E8%AE%BA%E6%96%87%E6%B1%87%E6%8A%A5%EF%BC%9APhysics-Driven%20Spatiotemporal%20Modeling%20for%20AI-Generated%20Video%20Detection/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E5%90%B8%E8%A1%80%E9%AC%BC%E7%9C%8B%E4%B9%A6.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">论文--物理驱动的时空建模在 AI 生成视频检测中的应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/05/08/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/" title="图像识别"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E7%96%AF%E7%8B%82%E8%B5%B6%E6%AD%BB%E7%BA%BF.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-05-08</div><div class="title">图像识别</div></div></a></div><div><a href="/2025/09/30/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="多层感知机"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E7%96%AF%E7%8B%82%E8%B5%B6%E6%AD%BB%E7%BA%BF.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-09-30</div><div class="title">多层感知机</div></div></a></div><div><a href="/2025/12/07/%E8%AE%BA%E6%96%87--GenWorld%EF%BC%9A%E9%9D%A2%E5%90%91%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E7%B1%BB-AI-%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91%E7%9A%84%E6%A3%80%E6%B5%8B%E7%A0%94%E7%A9%B6/" title="论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E5%90%B8%E8%A1%80%E9%AC%BC%E7%9C%8B%E4%B9%A6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-07</div><div class="title">论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究</div></div></a></div><div><a href="/2025/12/07/%E8%AE%BA%E6%96%87%E6%B1%87%E6%8A%A5%EF%BC%9APhysics-Driven%20Spatiotemporal%20Modeling%20for%20AI-Generated%20Video%20Detection/" title="论文--物理驱动的时空建模在 AI 生成视频检测中的应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E5%90%B8%E8%A1%80%E9%AC%BC%E7%9C%8B%E4%B9%A6.png" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-12-07</div><div class="title">论文--物理驱动的时空建模在 AI 生成视频检测中的应用</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/Avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__description"></div></div></div><div class="card-widget anzhiyu-right-widget" id="card-wechat" onclick="null"><div id="flip-wrapper"><div id="flip-content"><div class="face" style="background: url(https://bu.dusays.com/2023/01/13/63c02edf44033.png) center center / 100% no-repeat"></div><div class="back face" style="background: url(https://bu.dusays.com/2023/05/13/645fa415e8694.png) center center / 100% no-repeat"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text"></span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.</span> <span class="toc-text">一、数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1%E6%95%B0%E6%8D%AE%E9%80%89%E5%8F%96"><span class="toc-number">2.1.</span> <span class="toc-text">1.1数据选取</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%BD%92%E4%B8%80%E5%8C%96%E5%A4%84%E7%90%86"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 归一化处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E5%88%87%E5%89%B2"><span class="toc-number">2.3.</span> <span class="toc-text">1.3 滑动窗口切割</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E6%A0%87%E7%AD%BE%E5%A4%84%E7%90%86-RUL-Labeling"><span class="toc-number">2.4.</span> <span class="toc-text">1.4 标签处理 (RUL Labeling)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96"><span class="toc-number">3.</span> <span class="toc-text">二、特征提取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%B2%BE%E7%BB%86%E5%A4%8D%E5%90%88%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%89%B9%E5%BE%81%E7%86%B5-RCMPhE"><span class="toc-number">3.1.</span> <span class="toc-text">2.1 精细复合多尺度特征熵 (RCMPhE)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E7%9B%B8%E4%BD%8D%E7%86%B5-PhE-%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97"><span class="toc-number">3.1.1.</span> <span class="toc-text">2.1.1 相位熵 (PhE) 的基本计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E7%B2%BE%E7%BB%86%E5%A4%8D%E5%90%88%E5%A4%9A%E5%B0%BA%E5%BA%A6-Refined-Composite-%E9%80%BB%E8%BE%91"><span class="toc-number">3.1.2.</span> <span class="toc-text">2.1.2 精细复合多尺度 (Refined Composite) 逻辑</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%A4%9A%E5%BA%8F%E5%88%97%E7%B2%97%E7%B2%92%E5%8C%96-Multi-offset-Coarse-graining"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">1、多序列粗粒化 (Multi-offset Coarse-graining)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%B2%BE%E7%BB%86%E5%8C%96%E5%A4%84%E7%90%86-Refining"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">2、精细化处理 (Refining)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4%E4%B8%8E%E8%B0%83%E6%95%B4"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 实现步骤与调整</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-number">4.</span> <span class="toc-text">三、模型训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%BB%BA%E7%AB%8B%E4%B8%89%E8%B7%AF%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 建立三路数据加载器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AE%9A%E4%B9%89-DTFFNet-%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 定义 DTFFNet 模型架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E5%BC%82%E6%9E%84%E8%BE%93%E5%85%A5%E5%B1%82"><span class="toc-number">4.2.1.</span> <span class="toc-text">3.2.1 异构输入层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E5%BC%95%E6%93%8E"><span class="toc-number">4.2.2.</span> <span class="toc-text">3.2.2 特征提取引擎</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-%E6%B7%B1%E5%BA%A6%E7%89%B9%E5%BE%81%E8%9E%8D%E5%90%88%E6%A8%A1%E5%9D%97-Deep-Feature-Fusion-Module"><span class="toc-number">4.2.3.</span> <span class="toc-text">3.2.3 深度特征融合模块 (Deep Feature Fusion Module)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B5%8B%E8%AF%95%E8%AF%84%E4%BC%B0%E4%B8%8E%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">四、测试评估与可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%8C%87%E6%A0%87%E9%AA%8C%E8%AF%81"><span class="toc-number">5.1.</span> <span class="toc-text">4.1 指标验证</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/" title="项目-发动机健康预测"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E8%80%81%E5%A4%B4%E6%95%B2%E4%BB%A3%E7%A0%81.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="项目-发动机健康预测"/></a><div class="content"><a class="title" href="/2026/01/28/%E5%8F%91%E5%8A%A8%E6%9C%BA%E5%81%A5%E5%BA%B7%E9%A2%84%E6%B5%8B/" title="项目-发动机健康预测">项目-发动机健康预测</a><time datetime="2026-01-28T08:20:42.917Z" title="发表于 2026-01-28 16:20:42">2026-01-28</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/07/%E8%AE%BA%E6%96%87%E6%B1%87%E6%8A%A5%EF%BC%9APhysics-Driven%20Spatiotemporal%20Modeling%20for%20AI-Generated%20Video%20Detection/" title="论文--物理驱动的时空建模在 AI 生成视频检测中的应用"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E5%90%B8%E8%A1%80%E9%AC%BC%E7%9C%8B%E4%B9%A6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文--物理驱动的时空建模在 AI 生成视频检测中的应用"/></a><div class="content"><a class="title" href="/2025/12/07/%E8%AE%BA%E6%96%87%E6%B1%87%E6%8A%A5%EF%BC%9APhysics-Driven%20Spatiotemporal%20Modeling%20for%20AI-Generated%20Video%20Detection/" title="论文--物理驱动的时空建模在 AI 生成视频检测中的应用">论文--物理驱动的时空建模在 AI 生成视频检测中的应用</a><time datetime="2025-12-07T10:56:23.636Z" title="发表于 2025-12-07 18:56:23">2025-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/12/07/%E8%AE%BA%E6%96%87--GenWorld%EF%BC%9A%E9%9D%A2%E5%90%91%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E7%B1%BB-AI-%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91%E7%9A%84%E6%A3%80%E6%B5%8B%E7%A0%94%E7%A9%B6/" title="论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E5%90%B8%E8%A1%80%E9%AC%BC%E7%9C%8B%E4%B9%A6.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究"/></a><div class="content"><a class="title" href="/2025/12/07/%E8%AE%BA%E6%96%87--GenWorld%EF%BC%9A%E9%9D%A2%E5%90%91%E7%9C%9F%E5%AE%9E%E4%B8%96%E7%95%8C%E6%A8%A1%E6%8B%9F%E7%B1%BB-AI-%E7%94%9F%E6%88%90%E8%A7%86%E9%A2%91%E7%9A%84%E6%A3%80%E6%B5%8B%E7%A0%94%E7%A9%B6/" title="论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究">论文--GenWorld：面向真实世界模拟类 AI 生成视频的检测研究</a><time datetime="2025-12-07T10:56:23.634Z" title="发表于 2025-12-07 18:56:23">2025-12-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/09/30/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="多层感知机"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E7%96%AF%E7%8B%82%E8%B5%B6%E6%AD%BB%E7%BA%BF.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="多层感知机"/></a><div class="content"><a class="title" href="/2025/09/30/%E5%A4%9A%E5%B1%82%E6%84%9F%E7%9F%A5%E6%9C%BA/" title="多层感知机">多层感知机</a><time datetime="2025-09-30T06:29:09.714Z" title="发表于 2025-09-30 14:29:09">2025-09-30</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/05/08/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/" title="图像识别"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/%E7%96%AF%E7%8B%82%E8%B5%B6%E6%AD%BB%E7%BA%BF.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图像识别"/></a><div class="content"><a class="title" href="/2025/05/08/%E5%9B%BE%E5%83%8F%E8%AF%86%E5%88%AB/" title="图像识别">图像识别</a><time datetime="2025-05-08T08:32:46.000Z" title="发表于 2025-05-08 16:32:46">2025-05-08</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2020 - 2026 By <a class="footer-bar-link" href="/" title="G-forword" target="_blank">G-forword</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">6</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">1</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">1</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://blog.anheyu.com/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.ico" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://image.anheyu.com/" title="安知鱼图床"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://image.anheyu.com/favicon.ico" alt="安知鱼图床"/><span class="back-menu-item-text">安知鱼图床</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" style="font-size: 0.88rem;">深度学习<sup>5</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="565831280" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.5"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/playlist?id=565831280&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("04/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2020 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 G-forword 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script id="click-heart" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
